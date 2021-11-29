@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+	</head>
+	<body>
+	<form name="primos" action="#" style=" text-align: center;">
+		<h2>Calculadora de numeros primos</h2>
+		<p> Escribe el rango A : <input type="text" name="range1" size="4"></p>
+		<p> Escribe el rango B : <input type="text" name="range2" size="4"></p>
+		<button type="button" onclick="test()">Calcular</button>
+		<p> Se muestran los numeros primos entre ambos rangos : <div id="resultadoPrimos"></div></p>
+	</form>	
+		
+	<script type="text/javascript">
+//funcion que captura los dos parametros de entrada
+function test(){
+
+var a = parseInt(document.primos.range1.value,10); 
+var b = parseInt(document.primos.range2.value,10);
+var resultado = [];
+ 
+for (; a < b; a++) {
+
+  if (evaluaPrimo(a)) {
+      resultado.push(a);
+  }
+}
+  document.getElementById('resultadoPrimos').innerHTML=resultado;
+}
+
+//funcion que evalua si numero es divisible entre 2 y el mismo
+function evaluaPrimo(numero) {
+
+  for (var i = 2; i < numero; i++) {
+
+    if (numero % i === 0) {
+      return false;
+    }
+  }
+  return numero !== 1;
+}
+	</script>
+	</body>
+</html>   

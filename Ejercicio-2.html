@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+	</head>
+	<body>
+	<form name="primos" action="#" style=" text-align: center;">
+		<h2>Combinacion de entradas</h2>
+	    <strong><p> Se muestra el Json entrada 1 : </p></strong> <div id="values"></div> 
+		<strong><p> Se muestra el Json entrada 2 : </p></strong> <div id="json"></div>
+		<button type="button" onclick="ejecutar()">Calcular</button>
+		<strong><p> Se muestra el Json resultante : </p></strong> <div id="result"></div>
+	</form>	
+		
+	<script type="text/javascript">
+// JSON entrada 1
+   let values =  {
+        1: {
+            carrier: "CCH",
+            service: "DEX",
+        },
+        17: {
+            carrier: "CHP",
+            service: "express",
+        }
+   }
+  // JSON entrada 2
+   let json = { 
+                data: {
+                    BUIN: {
+                        limit: 1,
+                        over_carrier_service_id: 17,
+                        under_carrier_service_id: 17
+                    },
+                    LAJA: {
+                        limit: 1,
+                        over_carrier_service_id: 1,
+                        under_carrier_service_id: 1
+                    },
+                    LEBU: {
+                        limit: 1,
+                        over_carrier_service_id: 1,
+                        under_carrier_service_id: 1
+                    },
+                    LOTA: {
+                        limit: 1,
+                        over_carrier_service_id: 17,
+                        under_carrier_service_id: 17
+                    }
+                }
+            }
+			
+	document.getElementById('values').innerHTML = JSON.stringify(values);
+	document.getElementById('json').innerHTML = JSON.stringify(json);
+	
+// Funcion que cambia los llaves over_carrier_service_id y under_carrier_service_id, ademas llama la funcion reemplazo
+function ejecutar(){
+
+var result = [];
+
+json = JSON.parse(JSON.stringify(json).split('"over_carrier_service_id":').join('"over":'));
+json = JSON.parse(JSON.stringify(json).split('"under_carrier_service_id":').join('"under":'));
+
+result = JSON.parse(JSON.stringify(json.data, reemplazo));
+console.log(result)
+document.getElementById('result').innerHTML = JSON.stringify(result);
+}
+
+// Funcion que reemplaza el valor de las llaves over y under basados en el Json entrada 1
+function reemplazo(key, value) {
+  
+  if(key == 'over'){
+    
+   if (values[value]) {
+     return values[value];
+   }
+  }
+   if(key == 'under'){
+    
+   if (values[value]) {
+     return values[value];
+   }
+  }
+  return value;
+}
+
+	</script>
+	</body>
+</html>   
